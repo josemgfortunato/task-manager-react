@@ -14,6 +14,11 @@ const App = () => {
         id: '2',
         title: 'Ler Livros',
         completed: true,
+    },
+    {
+        id: '3',
+        title: 'Limpar a casa',
+        completed: false,
     }
        
     ]);
@@ -29,4 +34,4 @@ const App = () => {
        
 }
 
-export default App;
+export default App; 
