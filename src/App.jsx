@@ -1,12 +1,24 @@
+//React Imports
+
 import React, { useState } from 'react';
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
+
+//CSS Imports
+
 import "./App.css";
+
+//Components Imports
+
 import Tasks from './components/Tasks';
-import Task from './components/Task';
+// import Task from './components/Task';
 import AddTask from './components/AddTask';
-import Button from './components/Button';
+// import Button from './components/Button';
 import {v4 as uuidv4} from 'uuid';
 import Header from './components/Header';
-import { BrowserRouter as Router} from 'react-router-dom';
+import TaskDetails from './components/TaskDetails';
+
+//State
 
 const App = () => {
 
@@ -28,10 +40,12 @@ const App = () => {
        
     ]);
 
+//Functions
+
 const handleTaskClick = (taskId) => {
     const newTasks = tasks.map((task) => {
-        if (task.id == taskId) return {
-            ... task, completed: !task.completed
+        if (task.id === taskId) return {
+            ...task, completed: !task.completed
         }
         return task
     })
@@ -50,20 +64,31 @@ const handleTaskAddition = (taskTitle) => {
 }
 
 const handleTaskDelete = (taskId) => {
-    const newTasks = tasks.filter(task => task.id != taskId)
+    const newTasks = tasks.filter(task => task.id !== taskId)
 
     setTasks(newTasks)
 }
 
-    return (
+//Render App
 
-        <Router>
-             <div className="container">
-                <Header/>
-                <AddTask handleTaskAddition={handleTaskAddition} />
-                <Tasks tasks={tasks} handleTaskClick={handleTaskClick} handleTaskDelete={handleTaskDelete}/>
-             </div>
-        </Router>
+    return (
+            <BrowserRouter>
+                <div className="container"> 
+                    <Routes>
+                        <Route path="/" element={
+                            <>
+                                <Header/>                 
+                                <AddTask handleTaskAddition={handleTaskAddition} />
+                                <Tasks tasks={tasks} handleTaskClick={handleTaskClick} handleTaskDelete={handleTaskDelete} />            
+                            </>
+                        }>
+                        </Route>
+                        <Route path='/:taskTitle' element={
+                            <TaskDetails/>
+                        }/>
+                    </Routes>
+                </div>
+            </BrowserRouter>
     )
        
 }
