@@ -5,6 +5,8 @@ import Task from './components/Task';
 import AddTask from './components/AddTask';
 import Button from './components/Button';
 import {v4 as uuidv4} from 'uuid';
+import Header from './components/Header';
+import { BrowserRouter as Router} from 'react-router-dom';
 
 const App = () => {
 
@@ -26,6 +28,16 @@ const App = () => {
        
     ]);
 
+const handleTaskClick = (taskId) => {
+    const newTasks = tasks.map((task) => {
+        if (task.id == taskId) return {
+            ... task, completed: !task.completed
+        }
+        return task
+    })
+    setTasks(newTasks)
+}
+
 const handleTaskAddition = (taskTitle) => {
     const newTasks = [...tasks, {
         title: taskTitle,
@@ -37,14 +49,21 @@ const handleTaskAddition = (taskTitle) => {
     setTasks(newTasks)
 }
 
+const handleTaskDelete = (taskId) => {
+    const newTasks = tasks.filter(task => task.id != taskId)
+
+    setTasks(newTasks)
+}
+
     return (
 
-        <>
+        <Router>
              <div className="container">
-                <AddTask handleTaskAddition={handleTaskAddition}/>
-                <Tasks tasks={tasks}/>
+                <Header/>
+                <AddTask handleTaskAddition={handleTaskAddition} />
+                <Tasks tasks={tasks} handleTaskClick={handleTaskClick} handleTaskDelete={handleTaskDelete}/>
              </div>
-        </>
+        </Router>
     )
        
 }
