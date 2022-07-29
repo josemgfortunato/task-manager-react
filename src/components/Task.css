@@ -18,3 +18,18 @@
     color: chartreuse;
     margin: 0 5px;
 }
+
+.see-task-details-button:hover {
+    color: gold;
+}
+
+
+.remove-task-button:hover {
+    color: crimson;
+}
+
+.buttons-container {
+    width: 50px;
+    display: flex;
+    margin-right: 10px;
+}

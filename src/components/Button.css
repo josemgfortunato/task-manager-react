@@ -10,4 +10,10 @@
     cursor: pointer;
     border: none;
     flex: 1;
+    transition: all 0.5s ease;
+}
+
+.button:hover {
+    background-color: #444;
+    color: chartreuse;
 }
